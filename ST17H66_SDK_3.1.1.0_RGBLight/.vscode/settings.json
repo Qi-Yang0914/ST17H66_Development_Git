@@ -1,0 +1,8 @@
+{
+	"files.associations": {
+		"sbpprofile_ota.h": "c",
+		"lc_common.h": "c",
+		"ll_hw_drv.h": "c",
+		"lc_adc.h": "c"
+	}
+}
