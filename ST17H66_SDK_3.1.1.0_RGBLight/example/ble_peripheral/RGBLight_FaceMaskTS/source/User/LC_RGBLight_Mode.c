@@ -17,7 +17,7 @@
 /*------------------------------------------------------------------*/
 /* 					 	public variables		 					*/
 /*------------------------------------------------------------------*/
-uint16	LC_RGBLight_Modetick	=	0;
+uint16	LC_RGBLight_Modetick	=	2000;
 const	uint8	LC_RGBLight_Mode_Buffer[24]	=	{
 	255,   0,   0,		  0, 255,   0,		  0,   0, 255,	//	red,		green,	blue,
 	128,   0, 128,		128, 128,   0,		  0, 128, 128,	//	magenta,	yellow,	cyan,

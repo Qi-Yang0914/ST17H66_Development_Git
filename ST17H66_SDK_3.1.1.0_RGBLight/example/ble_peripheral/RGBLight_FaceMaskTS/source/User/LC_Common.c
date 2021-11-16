@@ -46,14 +46,14 @@ lc_rgblight_t		LC_RGBLight_Param	=
 #if(LC_RGBLight_Module ==	RGBWLight)
 	.RGB_wValue_New				=	0,
 #endif
-	.RGB_Speed_Reserved			=	50,
-	.RGB_Mode_Change_Speed		=	50,
+	.RGB_Speed_Reserved			=	0,
+	.RGB_Mode_Change_Speed		=	2000,
 	.RGB_Mode_Change_Color_Num	=	0,
 	.RGB_Mode_Fade_Color_Num	=	0,
 	.RGB_Mode_Flash_Time_Num	=	0,
-	.RGB_Light_State			=	1,
+	.RGB_Light_State			=	State_On,
 	.RGB_Light_Level			=	100,
-	.RGB_Light_Mode				=	0,
+	.RGB_Light_Mode				=	0x91,
 	.RGB_Light_Mode_Reserved	=	0,
 	.RGB_Light_Mode_Auto		=	0,
 };

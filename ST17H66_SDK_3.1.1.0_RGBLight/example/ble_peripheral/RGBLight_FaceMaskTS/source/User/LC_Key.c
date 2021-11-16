@@ -135,7 +135,7 @@ uint16	LC_Key_ProcessEvent(uint8 task_id, uint16 events)
 		attHandleValueNoti_t notif;
 		LC_key_time_temp = hal_systick()|1;
 		if(LC_Key_Param.key_down_flag){
-			if(LC_last_button_numbale && clock_time_exceed_func(LC_last_button_press_time,2*1000)){
+			if(LC_last_button_numbale && clock_time_exceed_func(LC_last_button_press_time,1500)){
 				LC_Key_Param.key_repeated_num	=	0;
 				if(Key_Long_Press_3s_Enable == 0){
 					Key_Long_Press_3s_Enable	=	1;

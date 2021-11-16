@@ -272,7 +272,7 @@ void	LC_PWMSetRGBValue(void)
 void	LC_Gpio_UI_Led_Buzzer_Init(void)
 {
 	LC_GPIO_RGBPinInit();
-	LC_ReadReservedData();
+	// LC_ReadReservedData();
 	LC_PWMChannelInit();
 	LC_PWMSetRGBValue();
 	hal_pwm_start();
@@ -387,7 +387,7 @@ void	LC_UI_Led_Buzzer_Task_Init(uint8 task_id)
 #if(LC_RGBLight_Key_Enable == 1)
 	LC_Gpio_Key_Init();
 #endif
-	LC_Switch_Poweron(0, 80);
+	LC_Switch_Poweron(0, 60);
 	LC_Gpio_UI_Led_Buzzer_Init();
 	LC_Timer_Start();
 	if(LC_Dev_System_Param.dev_power_flag == SYSTEM_WORKING)
