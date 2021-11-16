@@ -39,7 +39,7 @@ extern	"C"	{
 /*------------------------------------------------------------------*/
 #define		RGB_COLOR_MAX		(255)
 #define		RGB_PWM_MAX			(255)
-#define		RGB_WHITE_MAX		(180)
+#define		RGB_WHITE_MAX		(255)
 #define		RGB_LEVEL_PECENT	(100)
 #define		RGB_PWM_COLOR_MUL	(RGB_PWM_MAX/RGB_COLOR_MAX)
 

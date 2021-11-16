@@ -118,7 +118,7 @@ static uint8 scanRspData[] =
 #elif(LC_RGBLight_Module == RGBWLight)
 	0xFE,
 #endif
-    0x05, 0x00,	//software version
+    0x05, 0x01,	//software version
 	0x00,
 };
 
