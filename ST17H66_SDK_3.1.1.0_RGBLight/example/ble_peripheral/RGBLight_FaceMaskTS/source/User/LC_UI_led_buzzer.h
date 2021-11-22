@@ -46,14 +46,14 @@ extern	"C"	{
 #define		RGB_LEVEL_PECENT	(100)
 #define		RGB_PWM_COLOR_MUL	(RGB_PWM_MAX/RGB_COLOR_MAX)
 
-#define		BUZZER_FREQ		740
-#define		BUZZER_DUTY		370
+#define		BUZZER_FREQ			(740 - 1)
+#define		BUZZER_DUTY			(370 - 1)
 
-#define		LED_NO1_ON()		{hal_gpio_write(MY_GPIO_LED_NO1, 0);}
-#define		LED_NO1_OFF()		{hal_gpio_write(MY_GPIO_LED_NO1, 1);}
+#define		LED_NO1_ON()		hal_gpio_write(MY_GPIO_LED_NO1, 0)
+#define		LED_NO1_OFF()		hal_gpio_write(MY_GPIO_LED_NO1, 1)
 
-#define		BUZZER_ON()			{hal_gpio_write(MY_GPIO_PWM_NO1, 1);}
-#define		BUZZER_OFF()		{hal_gpio_write(MY_GPIO_PWM_NO1, 0);}
+#define		BUZZER_ON()			hal_gpio_write(MY_GPIO_PWM_NO1, 1)
+#define		BUZZER_OFF()		hal_gpio_write(MY_GPIO_PWM_NO1, 0)
 /*------------------------------------------------------------------*/
 /*						UI Task Events definitions					*/
 /*------------------------------------------------------------------*/

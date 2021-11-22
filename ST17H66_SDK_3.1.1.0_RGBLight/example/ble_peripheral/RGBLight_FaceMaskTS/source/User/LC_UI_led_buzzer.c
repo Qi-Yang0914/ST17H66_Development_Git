@@ -89,9 +89,9 @@ static	void	LC_PWMChannelInit(void)
 	hal_pwm_open_channel(PWM_CH3, MY_GPIO_LED_WW);
 #endif
 
-	// hal_pwm_init(PWM_CH4, PWM_CLK_DIV_8, PWM_CNT_UP, PWM_POLARITY_FALLING);
-	// hal_pwm_open_channel(PWM_CH4, MY_GPIO_PWM_NO1);
-	// hal_pwm_set_count_val(PWM_CH4, 0, BUZZER_FREQ);
+	hal_pwm_init(PWM_CH4, PWM_CLK_DIV_8, PWM_CNT_UP, PWM_POLARITY_FALLING);
+	hal_pwm_open_channel(PWM_CH4, MY_GPIO_PWM_NO1);
+	hal_pwm_set_count_val(PWM_CH4, 0, BUZZER_FREQ);
 
 }
 /**
@@ -133,13 +133,13 @@ void LC_Buzzer_Onoff(uint8 Onoff)
 {
 	if(Onoff)
 	{
-		// hal_pwm_set_count_val(PWM_CH4, BUZZER_DUTY, BUZZER_FREQ);
-		BUZZER_ON();
+		hal_pwm_set_count_val(PWM_CH4, BUZZER_DUTY, BUZZER_FREQ);
+		// BUZZER_ON();
 	}
 	else
 	{
-		// hal_pwm_set_count_val(PWM_CH4, 0, BUZZER_FREQ);
-		BUZZER_OFF();
+		hal_pwm_set_count_val(PWM_CH4, 0, BUZZER_FREQ);
+		// BUZZER_OFF();
 	}
 }
 /*!
@@ -240,11 +240,9 @@ void	LC_GPIO_RGBPinInit(void)
 #endif
 
 	hal_gpio_pin_init(MY_GPIO_LED_NO1, OEN);
-	// hal_gpio_write(MY_GPIO_LED_NO1, 0);
 	LED_NO1_OFF();
 
 	hal_gpio_pin_init(MY_GPIO_PWM_NO1, OEN);
-	// hal_gpio_write(MY_GPIO_PWM_NO1, 0);
 	BUZZER_OFF();
 }
 /**
@@ -390,6 +388,11 @@ void	LC_UI_Led_Buzzer_Task_Init(uint8 task_id)
 	LC_Switch_Poweron(0, 60);
 	LC_Gpio_UI_Led_Buzzer_Init();
 	LC_Timer_Start();
+	if(hal_gpio_read(GPIO_USB_CHECK) == 1)
+	{
+		LC_Dev_System_Param.dev_power_flag	=	SYSTEM_STANDBY;
+		osal_start_timerEx(LC_Ui_Led_Buzzer_TaskID, UI_EVENT_LEVEL5, 100);
+	}
 	if(LC_Dev_System_Param.dev_power_flag == SYSTEM_WORKING)
 	{
 		osal_start_timerEx(LC_Ui_Led_Buzzer_TaskID, UI_EVENT_LEVEL5, 10);

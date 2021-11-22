@@ -293,6 +293,7 @@ uint16	LC_Key_ProcessEvent(uint8 task_id, uint16 events)
 			if(LC_RGBLight_Param.RGB_Light_State == State_On)
 			{
 				LC_RGBLight_Turn_Onoff(State_Off);
+				LC_Dev_System_Param.dev_power_flag	=	SYSTEM_STANDBY;
 			}
 		}
 		osal_start_reload_timer(LC_Key_TaskID, KEY_CHARG_CHECK_EVT, 500);
