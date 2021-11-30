@@ -59,6 +59,9 @@
 /*------------------------------------------------------------------*/
 /*						MACROS										*/
 /*------------------------------------------------------------------*/
+//	Timer To Poweroff
+#define		POWEROFF_TIMER_CNT				(60)
+
 //	Light LED Module option
 #define		RGBLight						1
 #define		RGBWLight						2

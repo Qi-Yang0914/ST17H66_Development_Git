@@ -106,12 +106,20 @@ void	LC_Dev_WorkingTimer(void)
 		LOG("working time = %d [s]\n",LC_RGBLight_Param.RGB_Light_TimerSeconds);
 		if(LC_RGBLight_Param.RGB_Light_TimerSeconds == 0)
 		{
-			osal_stop_timerEx(LC_Ui_Led_Buzzer_TaskID, UI_EVENT_LEVEL2);
 			LC_RGBLight_Param.RGB_Light_TimerEn	=	State_Off;
 			if(LC_RGBLight_Param.RGB_Light_State == State_On)
 			{
 				LC_RGBLight_Turn_Onoff(State_Off);
 			}
+		}
+	}
+	else
+	{
+		LC_Dev_System_Param.dev_timeout_poweroff_cnt--;
+		if(LC_Dev_System_Param.dev_timeout_poweroff_cnt == 0)
+		{
+			LOG("power timer to sleep\n");
+			LC_Dev_System_Param.dev_power_flag		=	SYSTEM_STANDBY;
 		}
 	}
 }
@@ -396,6 +404,7 @@ void	LC_UI_Led_Buzzer_Task_Init(uint8 task_id)
 	if(LC_Dev_System_Param.dev_power_flag == SYSTEM_WORKING)
 	{
 		osal_start_timerEx(LC_Ui_Led_Buzzer_TaskID, UI_EVENT_LEVEL5, 10);
+		osal_start_timerEx(LC_Ui_Led_Buzzer_TaskID, UI_EVENT_LEVEL2, 1000);
 		LC_Led_No1_Enter_Mode(2);
 		LC_Buzzer_Enter_Mode(1);
 	}
@@ -429,8 +438,8 @@ uint16	LC_UI_Led_Buzzer_ProcessEvent(uint8 task_id, uint16 events)
 
 	if(events & UI_EVENT_LEVEL2)
 	{
-		osal_start_timerEx(LC_Ui_Led_Buzzer_TaskID, UI_EVENT_LEVEL2, 1000);
 		LC_Dev_WorkingTimer();
+		osal_start_timerEx(LC_Ui_Led_Buzzer_TaskID, UI_EVENT_LEVEL2, 1000);
 		return(events ^ UI_EVENT_LEVEL2);
 	}
 	// deal with datas from APP
@@ -514,11 +523,12 @@ uint16	LC_UI_Led_Buzzer_ProcessEvent(uint8 task_id, uint16 events)
 				{
 					LC_RGBLight_Param.RGB_Light_TimerEn			=	State_On;
 					LC_RGBLight_Param.RGB_Light_TimerSeconds	=	LC_App_Set_Param.app_write_data[5]*60 + LC_App_Set_Param.app_write_data[6] + 1;
-					osal_set_event(LC_Ui_Led_Buzzer_TaskID, UI_EVENT_LEVEL2);
+					LC_Dev_System_Param.dev_timeout_poweroff_cnt	=	POWEROFF_TIMER_CNT;
 				}
 				else if(LC_App_Set_Param.app_write_data[3] == 0x00)
 				{
 					LC_RGBLight_Param.RGB_Light_TimerEn			=	State_Off;
+					LC_Dev_System_Param.dev_timeout_poweroff_cnt	=	POWEROFF_TIMER_CNT;
 				}
 				notif.value[notif.len - 1]	=	LC_CheckSum(notif.value + 1, notif.value[2] + 2);
 			}

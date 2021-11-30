@@ -15,7 +15,7 @@
 #include "LC_Event_Handler.h"
 lc_dev_sys_param	LC_Dev_System_Param	=	
 {
-	.dev_timeout_poweroff_cnt	=	0xffff,
+	.dev_timeout_poweroff_cnt	=	POWEROFF_TIMER_CNT,
 	.dev_poweron_switch_flag	=	0,
 	.dev_power_flag				=	1,
 	.dev_lowpower_flag			=	0,

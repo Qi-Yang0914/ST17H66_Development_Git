@@ -163,6 +163,7 @@ uint16	LC_Key_ProcessEvent(uint8 task_id, uint16 events)
 					Key_Press_Once_Enable	=	1;
 					LC_Buzzer_Enter_Mode(2);
 					LOG("key pressed once cnt = %d\n",Key_Mode_Cnt);
+					LC_Dev_System_Param.dev_timeout_poweroff_cnt	=	POWEROFF_TIMER_CNT;
 					if(Key_Mode_Cnt <= 6)
 					{
 						if(LC_RGBLight_Param.RGB_Light_State == State_Off)
